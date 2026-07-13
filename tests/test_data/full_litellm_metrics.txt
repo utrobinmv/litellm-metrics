@@ -1,0 +1,134 @@
+# HELP litellm_proxy_total_requests_metric_total Total number of requests made to the proxy server
+# TYPE litellm_proxy_total_requests_metric_total counter
+litellm_proxy_total_requests_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",status_code="200",user_email="",route="/chat/completions",model_id="gpt-4o"} 150
+litellm_proxy_total_requests_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o-mini",team="",team_alias="",user="",status_code="200",user_email="",route="/chat/completions",model_id="gpt-4o-mini"} 80
+litellm_proxy_total_requests_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",status_code="500",user_email="",route="/chat/completions",model_id="gpt-4o"} 5
+# HELP litellm_proxy_failed_requests_metric_total Total number of failed responses from proxy
+# TYPE litellm_proxy_failed_requests_metric_total counter
+litellm_proxy_failed_requests_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",exception_status="500",exception_class="APIError",route="/chat/completions",model_id="gpt-4o"} 5
+# HELP litellm_spend_metric_total Total Spend
+# TYPE litellm_spend_metric_total counter
+litellm_spend_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",model="gpt-4o",team="",team_alias="",user=""} 0.042
+litellm_spend_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",model="gpt-4o-mini",team="",team_alias="",user=""} 0.008
+# HELP litellm_total_tokens_metric_total input + output tokens
+# TYPE litellm_total_tokens_metric_total counter
+litellm_total_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",model="gpt-4o"} 150000
+litellm_total_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o-mini",team="",team_alias="",user="",model="gpt-4o-mini"} 80000
+# HELP litellm_input_tokens_metric_total input tokens
+# TYPE litellm_input_tokens_metric_total counter
+litellm_input_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",model="gpt-4o"} 100000
+litellm_input_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o-mini",team="",team_alias="",user="",model="gpt-4o-mini"} 60000
+# HELP litellm_output_tokens_metric_total output tokens
+# TYPE litellm_output_tokens_metric_total counter
+litellm_output_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o",team="",team_alias="",user="",model="gpt-4o"} 50000
+litellm_output_tokens_metric_total{end_user="",hashed_api_key="abc123",api_key_alias="",requested_model="gpt-4o-mini",team="",team_alias="",user="",model="gpt-4o-mini"} 20000
+# HELP litellm_deployment_success_responses_total Total number of successful LLM API calls
+# TYPE litellm_deployment_success_responses_total counter
+litellm_deployment_success_responses_total{requested_model="gpt-4o",litellm_model_name="gpt-4o",model_id="gpt-4o",api_base="https://api.openai.com",api_provider="openai",hashed_api_key="abc123",api_key_alias="",team="",team_alias=""} 145
+litellm_deployment_success_responses_total{requested_model="gpt-4o-mini",litellm_model_name="gpt-4o-mini",model_id="gpt-4o-mini",api_base="https://api.openai.com",api_provider="openai",hashed_api_key="abc123",api_key_alias="",team="",team_alias=""} 80
+# HELP litellm_deployment_failure_responses_total Total number of failed LLM API calls
+# TYPE litellm_deployment_failure_responses_total counter
+litellm_deployment_failure_responses_total{requested_model="gpt-4o",litellm_model_name="gpt-4o",model_id="gpt-4o",api_base="https://api.openai.com",api_provider="openai",hashed_api_key="abc123",api_key_alias="",team="",team_alias="",exception_status="500",exception_class="APIError"} 5
+# HELP litellm_deployment_total_requests_total Total number of LLM API calls
+# TYPE litellm_deployment_total_requests_total counter
+litellm_deployment_total_requests_total{requested_model="gpt-4o",litellm_model_name="gpt-4o",model_id="gpt-4o",api_base="https://api.openai.com",api_provider="openai",hashed_api_key="abc123",api_key_alias="",team="",team_alias=""} 150
+litellm_deployment_total_requests_total{requested_model="gpt-4o-mini",litellm_model_name="gpt-4o-mini",model_id="gpt-4o-mini",api_base="https://api.openai.com",api_provider="openai",hashed_api_key="abc123",api_key_alias="",team="",team_alias=""} 80
+# HELP litellm_deployment_state The state of the deployment: 0 = healthy, 1 = partial outage, 2 = complete outage
+# TYPE litellm_deployment_state gauge
+litellm_deployment_state{litellm_model_name="gpt-4o",model_id="gpt-4o",api_base="https://api.openai.com",api_provider="openai"} 0
+litellm_deployment_state{litellm_model_name="gpt-4o-mini",model_id="gpt-4o-mini",api_base="https://api.openai.com",api_provider="openai"} 0
+# HELP litellm_request_total_latency_metric Total latency (seconds) for a request
+# TYPE litellm_request_total_latency_metric histogram
+litellm_request_total_latency_metric_bucket{le="0.1"} 10
+litellm_request_total_latency_metric_bucket{le="0.5"} 50
+litellm_request_total_latency_metric_bucket{le="1.0"} 120
+litellm_request_total_latency_metric_bucket{le="5.0"} 190
+litellm_request_total_latency_metric_bucket{le="10.0"} 195
+litellm_request_total_latency_metric_bucket{le="+Inf"} 200
+litellm_request_total_latency_metric_sum 150.5
+litellm_request_total_latency_metric_count 200
+# HELP litellm_llm_api_latency_metric Latency (seconds) for just the LLM API call
+# TYPE litellm_llm_api_latency_metric histogram
+litellm_llm_api_latency_metric_bucket{le="0.1"} 5
+litellm_llm_api_latency_metric_bucket{le="0.5"} 40
+litellm_llm_api_latency_metric_bucket{le="1.0"} 110
+litellm_llm_api_latency_metric_bucket{le="5.0"} 185
+litellm_llm_api_latency_metric_bucket{le="10.0"} 198
+litellm_llm_api_latency_metric_bucket{le="+Inf"} 200
+litellm_llm_api_latency_metric_sum 130.2
+litellm_llm_api_latency_metric_count 200
+# HELP litellm_overhead_latency_metric Latency overhead (seconds) added by LiteLLM processing
+# TYPE litellm_overhead_latency_metric histogram
+litellm_overhead_latency_metric_bucket{le="0.001"} 150
+litellm_overhead_latency_metric_bucket{le="0.01"} 190
+litellm_overhead_latency_metric_bucket{le="0.1"} 199
+litellm_overhead_latency_metric_bucket{le="+Inf"} 200
+litellm_overhead_latency_metric_sum 3.2
+litellm_overhead_latency_metric_count 200
+# HELP litellm_llm_api_time_to_first_token_metric Time to first token for LLM API call
+# TYPE litellm_llm_api_time_to_first_token_metric histogram
+litellm_llm_api_time_to_first_token_metric_bucket{le="0.1"} 20
+litellm_llm_api_time_to_first_token_metric_bucket{le="0.5"} 80
+litellm_llm_api_time_to_first_token_metric_bucket{le="1.0"} 150
+litellm_llm_api_time_to_first_token_metric_bucket{le="5.0"} 195
+litellm_llm_api_time_to_first_token_metric_bucket{le="+Inf"} 200
+litellm_llm_api_time_to_first_token_metric_sum 80.5
+litellm_llm_api_time_to_first_token_metric_count 200
+# HELP litellm_deployment_latency_per_output_token Latency per output token for deployment
+# TYPE litellm_deployment_latency_per_output_token histogram
+litellm_deployment_latency_per_output_token_bucket{le="0.01"} 50
+litellm_deployment_latency_per_output_token_bucket{le="0.05"} 120
+litellm_deployment_latency_per_output_token_bucket{le="0.1"} 180
+litellm_deployment_latency_per_output_token_bucket{le="+Inf"} 200
+litellm_deployment_latency_per_output_token_sum 12.5
+litellm_deployment_latency_per_output_token_count 200
+# HELP litellm_deployment_successful_fallbacks Number of successful fallback requests
+# TYPE litellm_deployment_successful_fallbacks counter
+litellm_deployment_successful_fallbacks{requested_model="gpt-4o",fallback_model="gpt-4o-mini",hashed_api_key="abc123",api_key_alias="",team="",team_alias="",exception_status="",exception_class=""} 3
+# HELP litellm_deployment_failed_fallbacks Number of failed fallback requests
+# TYPE litellm_deployment_failed_fallbacks counter
+litellm_deployment_failed_fallbacks{requested_model="gpt-4o",fallback_model="gpt-4o-mini",hashed_api_key="abc123",api_key_alias="",team="",team_alias="",exception_status="500",exception_class="APIError"} 1
+# HELP litellm_deployment_cooled_down Number of times a deployment has been cooled down
+# TYPE litellm_deployment_cooled_down counter
+litellm_deployment_cooled_down{litellm_model_name="gpt-4o",model_id="gpt-4o",api_base="https://api.openai.com",api_provider="openai"} 2
+# HELP litellm_callback_logging_failures_metric Total number of failed attempts to emit logs
+# TYPE litellm_callback_logging_failures_metric counter
+litellm_callback_logging_failures_metric{callback_name="s3_v3"} 0
+litellm_callback_logging_failures_metric{callback_name="langfuse"} 2
+# HELP http_requests_total HTTP requests total
+# TYPE http_requests_total counter
+http_requests_total{method="POST",status="200"} 200
+http_requests_total{method="POST",status="500"} 5
+http_requests_total{method="GET",status="200"} 50
+# HELP http_request_duration_highr_seconds HTTP request duration
+# TYPE http_request_duration_highr_seconds histogram
+http_request_duration_highr_seconds_bucket{le="0.1"} 30
+http_request_duration_highr_seconds_bucket{le="0.5"} 100
+http_request_duration_highr_seconds_bucket{le="1.0"} 180
+http_request_duration_highr_seconds_bucket{le="5.0"} 240
+http_request_duration_highr_seconds_bucket{le="+Inf"} 255
+http_request_duration_highr_seconds_sum 180.5
+http_request_duration_highr_seconds_count 255
+# HELP python_gc_collections_total GC collections
+# TYPE python_gc_collections_total counter
+python_gc_collections_total{generation="0"} 1500
+python_gc_collections_total{generation="1"} 200
+python_gc_collections_total{generation="2"} 15
+# HELP process_virtual_memory_bytes Virtual memory bytes
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 2147483648
+# HELP process_resident_memory_bytes Resident memory bytes
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 1073741824
+# HELP process_cpu_seconds_total CPU seconds total
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 120.5
+# HELP process_open_fds Open file descriptors
+# TYPE process_open_fds gauge
+process_open_fds 128
+# HELP process_max_fds Max file descriptors
+# TYPE process_max_fds gauge
+process_max_fds 1048576
+# HELP process_start_time_seconds Process start time
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1720000000

@@ -1,0 +1,12 @@
+# HELP valid_metric A valid metric
+# TYPE valid_metric gauge
+valid_metric 42
+# Some random garbage line
+this is not a metric
+# TYPE sci_metric gauge
+sci_metric 1.5e10
+# TYPE negative_metric gauge
+negative_metric -3.14
+{broken labels}
+no_value_here
+just some text 123abc
