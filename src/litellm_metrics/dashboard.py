@@ -101,6 +101,10 @@ H_LLM_LATENCY = "litellm_llm_api_latency_metric"
 H_OVERHEAD_LATENCY = "litellm_overhead_latency_metric"
 H_TTFT = "litellm_llm_api_time_to_first_token_metric"
 H_DEPLOY_LATENCY = "litellm_deployment_latency_per_output_token"
+H_QUEUE_TIME = "litellm_request_queue_time_seconds"
+
+# Gauge metrics
+G_IN_FLIGHT = "litellm_in_flight_requests"
 
 
 # -- Metrics collector ---------------------------------------------------
@@ -257,6 +261,42 @@ class Dashboard:
         content.add_row("process_open_fds", f"{open_fds:.0f} / {max_fds:.0f}")
 
         return Panel(content, title=" LIVE PROCESS ", border_style="green", padding=(0, 1))
+
+    def _in_flight_panel(self, metrics: dict) -> Panel:
+        """Panel: in-flight requests, output tok/s, queue time."""
+        g = metrics["gauge"]
+        c = metrics["counter"]
+        h = metrics["histograms"]
+
+        # In-flight requests
+        in_flight = g.get(G_IN_FLIGHT, 0)
+
+        # Output tok/s (rate)
+        output_total = sum(v for k, v in c.items() if k == M_OUTPUT_TOKENS)
+        output_rate = self._rate(M_OUTPUT_TOKENS, output_total)
+
+        # Queue time percentiles
+        parser = PrometheusParser()
+
+        def queue_pct(p: float) -> str:
+            hist = h.get(H_QUEUE_TIME)
+            if not hist or not hist["buckets"]:
+                return "N/A"
+            return fmt_time(parser.percentile_from_histogram(hist["buckets"], p))
+
+        content = Table(show_header=False, box=None, padding=(0, 1))
+        content.add_column("Metric", style="bold cyan", width=38)
+        content.add_column("Value", style="white", justify="right")
+
+        content.add_row("litellm_in_flight_requests",
+                        f"[bold green]{in_flight:.0f}")
+        content.add_row("litellm_output_tokens (rate)",
+                        f"[bold green]{output_rate:.1f} tok/s")
+        content.add_row("queue_time p50", f"[green]{queue_pct(0.5)}")
+        content.add_row("queue_time p95", f"[yellow]{queue_pct(0.95)}")
+        content.add_row("queue_time p99", f"[red]{queue_pct(0.99)}")
+
+        return Panel(content, title=" LIVE THROUGHPUT ", border_style="green", padding=(0, 1))
 
     # -- LIFETIME ------------------------------------------------------
 
@@ -586,6 +626,7 @@ class Dashboard:
         live_req = self._live_requests_panel(metrics)
         live_tok = self._live_tokens_panel(metrics)
         live_proc = self._live_process_panel(metrics)
+        live_throughput = self._in_flight_panel(metrics)
 
         # LIFETIME
         total_req = self._total_requests_panel(metrics)
@@ -602,7 +643,7 @@ class Dashboard:
 
         return Group(
             proxy_info,
-            Columns([live_req, live_tok, live_proc], equal=True, expand=True),
+            Columns([live_req, live_tok, live_proc, live_throughput], equal=True, expand=True),
             Columns([total_req, total_tok, deployments], equal=True, expand=True),
             Columns([http_pan, gc_pan, cb_fail], equal=True, expand=True),
             Columns([latency_pan, spend_pan], equal=True, expand=True),

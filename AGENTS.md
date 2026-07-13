@@ -13,13 +13,14 @@ litellm-metrics (CLI entry point: litellm_metrics.cli:cli)
 
 **pip-пакет** с `src/` layout. Установка: `pip install -e ".[dev]"`.
 
-## Панели дашборда (13 штук, 3 секции)
+## Панели дашборда (14 штук, 3 секции)
 
 ### REAL-TIME (зелёная рамка, обновляется каждые N сек)
 1. **Proxy Info** — URL, uptime, Redis latency
 2. **Live Requests** — total/failed requests (rate), success rate
 3. **Live Tokens** — input/output tokens (rate)
 4. **Live Process** — virt/res mem, CPU rate, open/max FDs
+5. **Live Throughput** — in_flight requests, output tok/s (rate), queue time p50/p95/p99
 
 ### LIFETIME (синяя рамка, накопительные)
 5. **Total Requests by Model** — запросы и ошибки по requested_model

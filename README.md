@@ -67,6 +67,7 @@ REFRESH_INTERVAL=2
 - **Live Requests** -- `litellm_proxy_total_requests_metric` (rate), `litellm_proxy_failed_requests_metric` (rate), success rate
 - **Live Tokens** -- `litellm_input_tokens_metric` (rate), `litellm_output_tokens_metric` (rate)
 - **Live Process** -- `process_virtual_memory_bytes`, `process_resident_memory_bytes`, `process_cpu_seconds_total` (rate), `process_open_fds`
+- **Live Throughput** -- `litellm_in_flight_requests` (текущие запросы), `litellm_output_tokens_metric` (rate, tok/s), `litellm_request_queue_time_seconds` (p50/p95/p99)
 
 ### LIFETIME (синяя рамка) -- накопительные счётчики
 
